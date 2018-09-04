@@ -1,0 +1,47 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript">
+
+        window.onload = function () 
+        {
+            document.getElementById("arrive_time").value = (new Date()).toISOString()
+        }
+
+    </script>
+{% endblock %}
+
+{% block styles %}
+    <style>
+        .otree-timer {
+            display: none;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+
+    <!DOCTYPE html>
+    <html>
+        <body>
+    {% formfield player.see_scores_choice %}
+
+
+        </body>
+    </html>
+
+    <div id="next">
+        <button class="btn btn-primary btn-large next-button" style="float: right;">Next</button>
+    </div>
+
+
+{% endblock %}
+
+{% comment %}
+ 
+{% endcomment %}

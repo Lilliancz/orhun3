@@ -90,6 +90,15 @@ class Results1WaitPage(CustomMturkWaitPage):
         self.group.set_payoffs()
 
 
+class SeeScoresChoice(CustomMturkPage):
+    form_model = 'player'
+    form_fields = ['see_scores_choice']
+
+    # only shown to those who chose B initially
+    def is_displayed(self):
+        return self.player.firm == "B"
+
+
 # game 1 results
 class Results1(CustomMturkPage):
     form_model = 'player'
@@ -129,6 +138,7 @@ class Results1(CustomMturkPage):
             'opponent2': opponent2.participant.vars['baseline_score'],
             'attempted': self.player.attempted,
             'correct': self.player.game1_score,
+            'see_scores_choice': self.player.see_scores_choice,
 
             # automatically pluralizes the word 'problem' if necessary
             'problems': inflect.engine().plural('problem', self.player.attempted)
@@ -144,7 +154,7 @@ class Results1(CustomMturkPage):
 
 class FinalSurvey(CustomMturkPage):
     form_model = 'player'
-    form_fields =['time_FinalSurvey', 'q8', 'q10','q11','q12']
+    form_fields =['time_FinalSurvey', 'q7_choice', 'q7','q8', 'q10','q11','q12']
     # timeout_seconds = settings.SESSION_CONFIGS[0]['time_limit']
 
     def before_next_page(self):
@@ -195,6 +205,7 @@ page_sequence = [
     GetReady,
     Game1,
     Results1WaitPage,
+    SeeScoresChoice,
     Results1,
     FinalSurvey,
     PerformancePayment,

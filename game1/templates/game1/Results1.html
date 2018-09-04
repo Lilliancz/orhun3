@@ -30,6 +30,14 @@
             <input type="hidden" name="time_Results1" id="arrive_time"/>
             <p>
 
+                {% if see_scores_choice == 'Yes' %}
+                    The following are the scores from Part 1:<BR><BR>
+					Your baseline score: {{ baseline }}.
+					<BR>
+                    Opponent 1's baseline score: {{ opponent1 }}.
+                    <br>
+                    Opponent 2's baseline score: {{ opponent2 }}.
+                {% endif %}
                 <br><br>
                 In Part 2, you attempted {{ attempted }} {{ problems }} and answered {{ correct }} of them correctly.
                 <br><br>

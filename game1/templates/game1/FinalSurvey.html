@@ -24,8 +24,21 @@
 {% endblock %}
 
 {% block content %}
-    
+
     <input type="hidden" name="time_FinalSurvey" id="arrive_time"/>
+    {% if player.firm == 'A' %}
+        Before you started the competition, you were shown the scores your opponents obtained in Part 1.<BR>
+    {% endif %}
+    {% if player.firm == 'B' %}
+        Before you started the competition, you only saw your own score from Part 1.
+        <BR>
+
+    {% endif %}
+    <br><br>
+
+    {% formfield player.q7_choice %}
+    {% formfield player.q7 %}
+<br><br>
     {% formfield player.q8 %}
     {% formfield player.q10 %}
     {% formfield player.q11 %}
