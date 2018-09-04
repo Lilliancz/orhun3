@@ -80,13 +80,13 @@ class Comprehension(Page):
         # set firm based on session config
         self.player.firm = self.session.config['condition']
         if self.player.firm == "A":
-            self.player.q3question = "True or False: I will be shown the scores my opponents obtained in part 1 " \
-                                     "before entering the competition."
+            self.player.q3question = "True or False: All participants will be shown the part 1 scores " \
+                                     "of their opponents before entering the competition."
             self.player.q3explanation = "Each participant will be shown the scores his/her opponents " \
                                         "obtained in part 1 before entering the competition."
         if self.player.firm == "B":
-            self.player.q3question = "True or False: I will not know the scores my opponents obtained in part 1 " \
-                                     "before entering the competition."
+            self.player.q3question = "True or False: None of the participants will know the part 1 scores " \
+                                     "of their opponents before entering the competition."
             self.player.q3explanation = "Each participant knows their own score from part 1, but does not know " \
                                         "the scores his/her opponents obtained before entering the competition."
         return {
