@@ -1,0 +1,47 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Thank you
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript">
+        window.onload = function () 
+        {
+            document.getElementById("arrive_time").value = (new Date()).toISOString();
+        }
+    </script>
+{% endblock %}
+
+{% block styles %}
+    <style>
+        .otree-timer {
+            display: none;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+
+    <!DOCTYPE html>
+    <html>
+        <body>
+            <input type="hidden" name="time_Results1" id="arrive_time"/>
+            <p>
+
+                <br><br>
+                In Part 2, you attempted {{ attempted }} {{ problems }} and answered {{ correct }} of them correctly.
+                <br><br>
+
+                Please click next to answer a few questions.
+                After completing that page, you will be told about how your performance compared to the others in your firm.
+
+            </p>
+        </body>
+    </html>
+
+    {% next_button %}
+{% endblock %}
+
+

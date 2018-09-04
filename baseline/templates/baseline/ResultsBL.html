@@ -1,0 +1,45 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Part 1 Results
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript">
+        window.onload = function () 
+        {
+            document.getElementById("arrive_time").value = (new Date()).toISOString();
+        }
+    </script>
+{% endblock %}
+
+{% block styles %}
+    <style>
+        .otree-timer {
+            display: none;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+
+    <!DOCTYPE html>
+    <html>
+        <body>
+            <input type="hidden" name="time_ResultsBL" id="arrive_time"/>
+            <p>
+                Thank you for your effort! {{ gameDuration }} has elapsed.
+                <br><br>
+                You attempted {{ player.attempted }} {{ problems }} and answered {{ player.baseline_score }} of them correctly.
+                <br><br>
+                Each correct question earned you 5 cents. <BR>
+				Therefore, your bonus payment from Part 1 is {{ player.baseline_bonus }}.
+            </p>
+        </body>
+    </html>
+
+    {% next_button %}
+{% endblock %}
+
+

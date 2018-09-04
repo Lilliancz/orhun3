@@ -1,0 +1,47 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Thank you
+{% endblock %}
+
+{% block scripts %}
+     <script type="text/javascript">
+        window.onload = function ()
+        {
+            document.getElementById("arrive_time").value = (new Date()).toISOString()
+        }
+
+
+
+    </script>
+{% endblock %}
+
+{% block styles %}
+    <style>
+        .otree-timer {
+            display: none;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+
+    <!DOCTYPE html>
+    <html>
+        <body>
+            <input type="hidden" name="time_Debrief" id="arrive_time">
+            <p>
+
+This was an academic study aiming to determine how people react to feedback and why. If you have any comments, please leave them here.
+{% formfield player.debriefComments %}
+{{ form.time_Debrief.errors }}
+
+            </p>
+        </body>
+    </html>
+
+    {% next_button %}
+{% endblock %}
+
+

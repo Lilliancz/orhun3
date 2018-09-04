@@ -1,0 +1,58 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block scripts %}
+    <script type="text/javascript">
+        window.onload = function () 
+        {
+            document.getElementById("arrive_time").value = (new Date()).toISOString()
+        }
+
+        
+
+    </script>
+    <style>hidden{display:none}</style>
+            <style>
+        .otree-timer {
+            display: none;
+        }
+    </style>
+{% endblock %}
+
+{% block title %}
+Instructions for Part 2
+{% endblock %}
+
+{% block content %}
+    
+    <input type="hidden" name="time_Comprehension" id="arrive_time"/>
+                <p>
+                Thank you for your participation. Now, we move onto Part 2 of the study. Please read these instructions carefully.
+                    You MUST answer the comprehension questions correctly to continue. If you do not answer them correctly, you will
+                    be skipped to the end and will not be able to play in Part 2.
+                <br><br>
+                In Part 2, <B>you will compete with two other players</b> in a sequence of tasks like the one you saw earlier.
+                Each player will have {{ gameDuration }} to complete as many problems correctly as possible.
+                Your opponents will get the exact same problems that you will get. After the {{ gameDuration }} are up,
+                the player who has the most correct answers wins first place and a prize of <b>$2.50</b>.
+                The player with the second most correct answers gets second place and wins a prize of <b>$1.00</b>.
+                The player with the least number of correct answers gets third place, and will not receive a prize.
+                <br><br>
+                Your bonus from this part will only be determined by your rank in the competition.
+                <BR><BR>Therefore, it is important to <U>do your very best and work as fast and as correctly as you can</U>.
+                You will again see the clock counting down the time you have left. For optimal performance in a competition,
+                it is important to be <u>focused, alert and keep your cool</u>.
+
+                <BR><BR>
+                    {{ player.q3explanation }}
+            </p>
+<H2>Questions</H2>
+
+
+    {% formfield player.q2 %}
+
+    {% formfield player.q3 label=player.q3question %}
+
+    {% next_button %}
+
+{% endblock %}

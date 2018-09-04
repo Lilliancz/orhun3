@@ -1,0 +1,266 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block scripts %}
+    <script type="text/javascript">
+        window.onload = function () 
+        {
+            document.getElementById("arrive_time").value = (new Date()).toISOString()
+        }
+
+    </script>
+{% endblock %}
+
+{% block styles %}
+    <style>
+        .slider
+        {
+            -webkit-appearance: none;
+            width: 100%;
+            outline: none;
+            background: lightgray;
+            height: 7px;
+            border-radius: 5px;
+        }
+        .slider-val
+        {
+            border-style: solid;
+            border-width: 1px;
+            border-color: #419bf9;
+            border-radius: 4px;
+
+            text-align: center;
+        }
+    </style>
+{% endblock %}
+
+{% block title %}
+    Survey
+{% endblock %}
+
+{% block content %}
+    Relative to how well you actually did, what was your performance judgment after you completed the task?
+    <input type="hidden" name="time_Survey1" id="arrive_time"/>
+    <br><br>
+
+    <input class="slider" name="q1" type="range" min="0" max="10" value="5"/>
+
+    <br>
+    <div class="row">
+        <div class="col-2">
+            I expected a lower score than what I got
+        </div>
+        <div class="col-2">
+            I performed just as well as I expected
+        </div>
+        <div class="col-2" style="text-align: right">
+            I expected a higher score than what I got
+        </div>
+    </div>
+    <br>
+    <br>
+
+
+    {% next_button %}
+
+{% endblock %}
+
+
+
+{% comment %}
+
+<div>
+        
+        <input type="hidden" name="s9a" id="s9a">
+        <input type="hidden" name="s9b" id="s9b">
+        <input type="hidden" name="s10a" id="s10a">
+        <input type="hidden" name="s10b" id="s10b">
+        <input type="hidden" name="s11a" id="s11a">
+        <input type="hidden" name="s11b" id="s11b">
+    </div>
+    <div>
+        <div>
+            <h5>
+                The information you enter in this survey will be kept strictly confidential
+                and will not be linked to your identity.
+            </h5>
+        </div>
+        <div>
+            <p>
+                1. What is your gender?
+            </p>
+            {% formfield player.s1 label=None %}
+        </div>
+        <div>
+            <p>
+                2. What is your age?
+            </p>
+            {% formfield player.s2 label=None %}
+        </div>
+        <div>
+            <p>
+                3. What is your field of study?
+            </p>
+            {% formfield player.s3 label=None %}
+        </div>
+        <div>
+            <p>
+                4. What is the zip code you grew up in?
+            </p>
+            {% formfield player.s4 label=None %}
+        </div>
+        <div>
+            <p class="question">5. Do you or your family usually donate to charities?</p>
+            {% formfield player.s5 label=None %}
+        </div>
+        <div>
+            <p class="question">6. Are you working now?</p>
+            {% formfield player.s6 label=None %}
+        </div>
+        <div>
+            <p>
+                7. On a scale from 1 to 10, with 1 being the lowest and 10 being the highest, how much do you care about the missions of the charity of your choice?
+            </p>
+            <div class="row">
+                <div class="col-6">
+                    <input id="s7" class="slider" type="range" min="1" max="10" name="s7"
+                        value="{{ s7_initial }}" oninput="s7_update()">
+                    <div class="row">
+                        <div class="col-6">
+                            <p style="text-align: left;">
+                                1
+                            </p>
+                        </div>
+                        <div class="col-6">
+                            <p style="text-align: right;">
+                                10
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-1">
+                    <p id="s7_val" class="slider-val">
+                        {{ s7_initial }}
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        {% if pub_90_don != 0 %}
+            <div>
+                <p class="question">8. Which situation would you prefer?</p>
+                {% formfield player.s8 label=None %}
+            </div>
+        {% endif %}
+
+        <div>
+            <p>
+                {{ q9 }}. If Alex donated $20 without any rebate, split 10 points between the following states. You should assign more points to the statement that you agree more on. <b>Alex is donating because they care about:</b>
+            </p>
+
+            <div class="row">
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-6">
+                            <p style="text-align: left;">
+                                the charity and its mission
+                            </p>
+                        </div>
+                        <div class="col-6">
+                            <p style="text-align: right;">
+                                the rebate
+                            </p>
+                        </div>
+                    </div>
+                    <input id="s9" class="slider" type="range" min="0" max="10"
+                        value="{{ s9_r }}" oninput="sval_update('s9_left', 's9_right', 's9')">
+                    <div class="row">
+                        <div class="col-6">
+                            <p id="s9_left" style="text-align: left;">
+                                {{ s9_l }}
+                            </p>
+                        </div>
+                        <div class="col-6">
+                            <p id="s9_right" style="text-align: right;">
+                                {{ s9_r }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <p>
+                {{ q10 }}. If Alex donated $20 with a rebate of <b>5%</b>, split 10 points between the following states. You should assign more points to the statement that you agree more on. <b>Alex is donating because they care about:</b>
+            </p>
+            
+            <div class="row">
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-6">
+                            <p style="text-align: left;">
+                                the charity and its mission
+                            </p>
+                        </div>
+                        <div class="col-6">
+                            <p style="text-align: right;">
+                                the rebate
+                            </p>
+                        </div>
+                    </div>
+                    <input id="s10" class="slider" type="range" min="0" max="10"
+                        value="{{ s10_r }}" oninput="sval_update('s10_left', 's10_right', 's10')">
+                    <div class="row">
+                        <div class="col-6">
+                            <p id="s10_left" style="text-align: left;">
+                                {{ s10_l }}
+                            </p>
+                        </div>
+                        <div class="col-6">
+                            <p id="s10_right" style="text-align: right;">
+                                {{ s10_r }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <p>
+                {{ q11 }}. If Alex donated $20 with a rebate of <b>95%</b>, split 10 points between the following states. You should assign more points to the statement that you agree more on. <b>Alex is donating because they care about:</b>
+            </p>
+
+            <div class="row">
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-6">
+                            <p style="text-align: left;">
+                                the charity and its mission
+                            </p>
+                        </div>
+                        <div class="col-6">
+                            <p style="text-align: right;">
+                                the rebate
+                            </p>
+                        </div>
+                    </div>
+                    <input id="s11" class="slider" type="range" min="0" max="10"
+                        value="{{ s11_r }}" oninput="sval_update('s11_left', 's11_right', 's11')">
+                    <div class="row">
+                        <div class="col-6">
+                            <p id="s11_left" style="text-align: left;">
+                                {{ s11_l }}
+                            </p>
+                        </div>
+                        <div class="col-6">
+                            <p id="s11_right" style="text-align: right;">
+                                {{ s11_r }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endcomment %}

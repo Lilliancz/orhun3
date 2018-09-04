@@ -1,0 +1,42 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    MTURK CODE - DO NOT CLOSE THIS WINDOW!
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}
+
+{% block styles %}
+    <style>
+        .otree-timer {
+            display: none;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+
+    <!DOCTYPE html>
+    <html>
+        <body>
+            <input type="hidden" name="time_Results1" id="arrive_time"/>
+            <p>
+
+DO NOT CLOSE THIS WINDOW.
+                <BR><BR>
+                Your bonus payment from Part 1 is {{ player.baseline_bonus }}.
+                <BR>
+                You will not receive a bonus from Part 2.
+                <BR><BR>
+
+                To receive credit on MTurk, you must copy and paste the URL from this page into your HIT. <BR><BR>
+                Enter the URL into the SECRET KEY input box.<BR><BR>
+                If we do not receive the correct URL, you will not be credited.
+            </p>
+        </body>
+    </html>
+{% endblock %}
+
+

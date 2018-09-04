@@ -1,0 +1,55 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    General Instructions
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript">
+        window.onload = function () 
+        {
+            document.getElementById("arrive_time").value = (new Date()).toISOString();
+        }
+    </script>
+{% endblock %}
+
+{% block styles %}
+    <style>
+        .otree-timer {
+            display: none;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    
+    <!DOCTYPE html>
+    <html>
+        <body>
+            <input type="hidden" name="time_Instructions" id="arrive_time"/>
+            <p>
+                Please read these instructions carefully, as your earnings will depend on understanding them.
+                The study involves two parts. In each part, you will have the chance to earn an additional bonus <I>based on your performance</i>.
+                The study involves several participants who are working on the same tasks at the same time.
+                Therefore, after the completion of each part, you may be asked to <B>wait until other participants reach the end of that part</b>.
+                Please do not scroll away from the screen or step away from the computer. The waiting times will not be long.
+                To ensure short wait times for everyone, <B>if you are inactive for more than {{ pageTimeoutWording }},
+                the program will determine that you have left</b>, and automatically end your session, and <B>you will not receive any bonus</b>.
+                Therefore, it is important to be attentive to the study at all times.
+                <br><br>
+                You can quit the study at any time. If you choose to quit the study before it’s over, you will only earn the base HIT payment.
+                <BR><BR>At the end of the study, you will see a page titled MTURK CODE.
+                Please follow instructions on that page to enter your code so we can pay all the additional bonuses you accumulated in the study.
+                <br><br>
+                Please click next to confirm you have understood this information, and to read detailed instructions about
+                the first part of the study.
+
+            </p>
+        </body>
+    </html>
+
+    {% next_button %}
+{% endblock %}
+
+

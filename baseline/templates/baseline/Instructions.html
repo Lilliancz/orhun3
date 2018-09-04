@@ -1,0 +1,61 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Instructions (Part 1)
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript">
+        window.onload = function () 
+        {
+            document.getElementById("arrive_time").value = (new Date()).toISOString();
+        }
+    </script>
+{% endblock %}
+
+{% block styles %}
+    <style>
+        .otree-timer {
+            display: none;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    
+    <!DOCTYPE html>
+    <html>
+        <body>
+            <input type="hidden" name="time_Instructions" id="arrive_time"/>
+            <p>
+                In part 1, you will work on a task that consists of a sequence of arithmetic questions.
+                You will try to answer as many arithmetic problems as possible in {{ gameDuration }}.
+                Each arithmetic problem requires you to add three numbers.
+                <br><br>
+				Example Question: Three plus four plus seven 
+				<BR>Correct answer: 14
+				<br><br>
+				Even though the question expressed numbers in a written form, you must enter your answers in numeric form,
+                for example `14’ rather than ‘fourteen’. You will not be able to click the submit button before you answer
+                each question. If you want to proceed to the next question without necessarily getting the answer right,
+                you can type `1’ and click submit.
+                <BR><BR>
+                There is no penalty for getting answers wrong. Your goal is to answer as many questions correctly as possible.
+				<br><br>
+				You will be paid based on the number of questions you answer correctly in a period of {{ gameDuration }}.
+                You will earn 5 cents for each correct answer.
+				<br><br>
+				At the end of the {{ gameDuration }}, the program will display the number of questions you attempted
+                and the number of questions you got right.
+
+				<br><br>
+				Good luck!
+            </p>
+        </body>
+    </html>
+
+    {% next_button %}
+{% endblock %}
+
+

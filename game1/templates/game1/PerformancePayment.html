@@ -1,0 +1,49 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Thank you
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript">
+        window.onload = function () 
+        {
+            document.getElementById("arrive_time").value = (new Date()).toISOString();
+        }
+    </script>
+{% endblock %}
+
+{% block styles %}
+    <style>
+        .otree-timer {
+            display: none;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+
+    <!DOCTYPE html>
+    <html>
+        <body>
+            <input type="hidden" name="time_PerformancePayment" id="arrive_time"/>
+            <p>
+
+                In Part 1, your bonus payment was {{ baseline_bonus }}.<BR><BR>
+
+                In the competition presented in Part 2, you attempted {{ attempted }} {{ problems }} and
+                got {{ correct }} questions correct.
+                You ranked {{ player.game1_rank }} out of 3 players.
+                As a result, your prize from Part 2 is {{ player.game1_bonus }}.<BR><BR>
+                In total, you will be paid {{ total_bonus }} on top of the HIT payment.
+
+
+            </p>
+        </body>
+    </html>
+
+    {% next_button %}
+{% endblock %}
+
+

@@ -1,0 +1,36 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block scripts %}
+    <script type="text/javascript">
+        window.onload = function () 
+        {
+            document.getElementById("arrive_time").value = (new Date()).toISOString()
+        }
+
+        
+
+    </script>
+    <style>hidden{display:none}</style>
+        <style>
+        .otree-timer {
+            display: none;
+        }
+    </style>
+{% endblock %}
+
+{% block title %}
+    Survey Questions
+{% endblock %}
+
+{% block content %}
+    
+    <input type="hidden" name="time_FinalSurvey" id="arrive_time"/>
+    {% formfield player.q8 %}
+    {% formfield player.q10 %}
+    {% formfield player.q11 %}
+    {% formfield player.q12 %}
+
+    {% next_button %}
+
+{% endblock %}

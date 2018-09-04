@@ -1,0 +1,104 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block scripts %}
+    <script type="text/javascript">
+       
+        var problems = {{ problems | json }}
+        var counter = -1
+        var correct = 0
+        // Get the input field
+
+        //this code allows the enter key to submit
+        //thanks to stack overflow Steve Paulo
+        //https://stackoverflow.com/questions/155188/trigger-a-button-click-with-javascript-on-the-enter-key-in-a-text-box
+        document.getElementById("submit_")
+            .addEventListener("keyup", function(event) {
+            event.preventDefault();
+            if (event.keyCode === 13) {
+                document.getElementById("answerbutton").click();
+            }
+        });
+
+
+        // called when the page is loaded and when the current answer has been processed.
+        // sets forms to their correct values in preparation for page submittal,
+        // increments problem counter, and displays new problem.
+        next = function() {
+            document.getElementById('correct').value = correct
+            var problem = document.getElementById('problem')
+            counter++
+
+            document.getElementById('attempted').value = counter
+            document.getElementById('title').innerHTML = 'Problem ' + (counter + 1)
+
+            var current = problems[counter]
+            var text = current[0]
+            problem.innerHTML = text[0] + ' plus ' + text[1] + ' plus ' + text[2]
+            //this code puts the cursor back into the input text after submitting an answer
+            document.getElementById("submit_").focus();
+        }
+
+        // called when someone presses the submit button.
+        // verifies their answer and calls next()
+        verify = function() {
+            var submitted = document.getElementById('submit_').value
+            if(submitted != '') {
+                document.getElementById('submit_').value = ''
+                var current = problems[counter]
+                var answer = current[1]
+                if(submitted == answer) {
+                    correct++
+                    document.getElementById('credit').value += 0.05
+                }
+                next()
+            }
+        }
+
+        // called when the page first loads
+        window.onload = function() {
+            document.getElementById("arrive_time").value = (new Date()).toISOString();
+            next()
+        }
+
+    </script>
+{% endblock %}
+
+{% block content %}
+
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <h3 id="title">
+            </h3>
+            <br><br>
+        </head>
+        <body>
+            <input type="hidden" name="time_Baseline" id="arrive_time"/>
+            <input type="hidden" name="baseline_score" id="correct">
+            <input type="hidden" name="attempted" id="attempted">
+            <input type="hidden" name="credit" id="credit">
+            <div>
+                <div>
+                    <p id="problem">
+                    </p>
+                </div>
+                <div>
+                    <input id="submit_" type="number"
+                        onkeypress="if (event.keyCode == 13 ||
+                            event.keyCode == 46 || event.keyCode == 45) return false">
+                </div>
+                <div>Please enter the answer in numerical format.
+                    <br><br>
+                    <button type="button" id="answerbutton" class="btn btn-large"
+                    onclick="verify()" style="background-color: #6ded31; color: #2d2d2d">
+                        Submit
+                    </button>
+                </div>
+            </div>
+        </body>
+    </html>
+
+{% endblock %}
+
+
